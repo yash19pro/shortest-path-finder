@@ -12,7 +12,7 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
-  String selectedCurrency = 'Vile Parle', selectedCurrency2 = 'Vile Parle';
+  String selectedCurrency = 'Mumbai', selectedCurrency2 = 'Mumbai';
   List<String> messageWidgets = [""];
   int mlen = 1;
   DropdownButton<String> androidDropdown(int a) {
@@ -111,7 +111,7 @@ class _PriceScreenState extends State<PriceScreen> {
           ),
         ),
         title: Text(
-          'Shortest Path Finder',
+          'Minimum Cost Finder',
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -127,6 +127,7 @@ class _PriceScreenState extends State<PriceScreen> {
             Column(children: [
               ListView.builder(
                 padding: EdgeInsets.fromLTRB(50, 250, 50, 50),
+                scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: mlen,
                 itemBuilder: (context, index) {
@@ -151,10 +152,35 @@ class _PriceScreenState extends State<PriceScreen> {
                         await Add(selectedCurrency, selectedCurrency2);
                     Map<dynamic, dynamic> parse = jsonDecode(Response);
                     print(parse["path"]);
+                    String x = "";
+                    int cnt = 0;
                     for (var i in parse["path"]) {
-                      ans.add(currenciesList[i]);
+                      if (cnt == 0) {
+                        x += currenciesList[i];
+                      } else {
+                        x += ' --${parse['edge'][cnt]}--> ' + currenciesList[i];
+                      }
+                      cnt++;
                     }
-                    ans.add("You Need to Pay \$${parse["cost"][0]}!");
+
+                    // int cnt = 0;
+                    // for (var i in parse["path"]) {
+                    //   if (cnt == 0) {
+                    //     ans.add(currenciesList[i]);
+                    //   } else {
+                    //     ans.add('|');
+                    //     ans.add('${parse["edge"][cnt]}');
+                    //     ans.add('|');
+                    //     ans.add('V');
+                    //     ans.add(currenciesList[i]);
+                    //   }
+                    //   cnt++;
+                    // }
+
+                    ans.add(x);
+                    ans.add('\n');
+                    ans.add("You Need to Pay Rs.${parse["cost"][0]}K!");
+                    print(parse['edge']);
                     setState(
                       () {
                         messageWidgets = ans;

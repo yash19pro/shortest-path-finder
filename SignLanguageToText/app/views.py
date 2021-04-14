@@ -70,7 +70,7 @@ graph = [[0, 4, 0, 0, 0, 0, 0, 8, 0],
            ]
 
 
-x = {"Vile Parle": 0, "Andheri": 1, "Bandra": 2 , "Dadar": 3, "Malad": 4, "Kandivali": 5, "Churchgate": 6, "Santacruz": 7, "Borivali": 8}
+x = {"Mumbai": 0, "Delhi": 1, "Kolkata": 2 , "Maldives": 3, "Dubai": 4, "Bali": 5, "New York": 6, "Bangkok": 7, "London": 8}
 
 @api_view(['POST'])
 def AslToText(request):
