@@ -87,4 +87,12 @@ def AslToText(request):
         print(to,fro,len(solution))
         ans['path'] = solution[to][0]
         ans['cost'] = solution[to][1]
+        cs = []
+        prev = 0
+        for i in solution[to][0]:
+            cs.append(solution[i][1][0]-prev)
+            prev = solution[i][1][0]
+        print(solution)
+        print(cs)
+        ans['edge']= cs
         return Response(ans,200)
